@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVG Collage Print - 3 on one page</title>
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #fafafa;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .print-btn {
+      padding: 10px 20px;
+      margin-bottom: 30px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .print-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .collage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .svg-container {
+      flex: 1 1 200px;
+      aspect-ratio: 1;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .svg-container object {
+      width: 100%;
+      height: 100%;
+    }
+
+    @media(max-width: 768px) {
+      .collage {
+        gap: 15px;
+      }
+    }
+
+    /* Ensure landscape, no margins, print-friendly */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: #000;
+      }
+
+      .print-btn {
+        display: none;
+      }
+
+      .collage {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      .svg-container {
+        flex: 1 1 33.33%;
+        padding: 0;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        height: 100%;
+      }
+
+      .svg-container object {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">Print</button>
+
+  <div class="collage">
+    <div class="svg-container">
+      <object type="image/svg+xml" data="https://upload.wikimedia.org/wikipedia/en/0/08/Flag_of_Hezbollah.svg"></object>
+    </div>
+    <div class="svg-container">
+      <object type="image/svg+xml" data="https://upload.wikimedia.org/wikipedia/en/5/55/Emblem_of_Hamas.svg"></object>
+    </div>
+    <div class="svg-container">
+      <object type="image/svg+xml" data="https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg"></object>
+    </div>
+  </div>
+
+</body>
+</html>
